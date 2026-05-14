@@ -3,49 +3,51 @@ application.elf:     file format elf32-littlearm
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .isr_vector   0000010c  08004400  08004400  00000400  2**0
+  0 .isr_vector   0000010c  08004400  08004400  00001400  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00001100  0800450c  0800450c  0000050c  2**2
+  1 .text         00001100  0800450c  0800450c  0000150c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000024  0800560c  0800560c  0000160c  2**2
+  2 .rodata       00000024  0800560c  0800560c  0000260c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08005630  08005630  0000200c  2**0
+  3 .ARM.extab    00000000  08005630  08005630  0000300c  2**0
                   CONTENTS, READONLY
-  4 .ARM          00000000  08005630  08005630  0000200c  2**0
+  4 .ARM          00000000  08005630  08005630  0000300c  2**0
                   CONTENTS, READONLY
-  5 .preinit_array 00000000  08005630  08005630  0000200c  2**0
+  5 .preinit_array 00000000  08005630  08005630  0000300c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08005630  08005630  00001630  2**2
+  6 .init_array   00000004  08005630  08005630  00002630  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  7 .fini_array   00000004  08005634  08005634  00001634  2**2
+  7 .fini_array   00000004  08005634  08005634  00002634  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  8 .data         0000000c  20000000  08005638  00002000  2**2
+  8 .data         0000000c  20000000  08005638  00003000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000020  2000000c  08005644  0000200c  2**2
+  9 .bss          00000020  2000000c  08005644  0000300c  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  2000002c  08005644  0000202c  2**0
+ 10 ._user_heap_stack 00000604  2000002c  08005644  0000302c  2**0
                   ALLOC
- 11 .ARM.attributes 00000029  00000000  00000000  0000200c  2**0
+ 11 .ARM.attributes 00000029  00000000  00000000  0000300c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002c2e  00000000  00000000  00002035  2**0
+ 12 .header       00000014  08004000  08004000  00001000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+ 13 .debug_info   00002caa  00000000  00000000  00003035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000f5b  00000000  00000000  00004c63  2**0
+ 14 .debug_abbrev 00000f6d  00000000  00000000  00005cdf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000003e8  00000000  00000000  00005bc0  2**3
+ 15 .debug_aranges 000003e8  00000000  00000000  00006c50  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000002c5  00000000  00000000  00005fa8  2**0
+ 16 .debug_rnglists 000002c5  00000000  00000000  00007038  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015b3e  00000000  00000000  0000626d  2**0
+ 17 .debug_macro  00015b4c  00000000  00000000  000072fd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00004e6d  00000000  00000000  0001bdab  2**0
+ 18 .debug_line   00004e7d  00000000  00000000  0001ce49  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007bcf1  00000000  00000000  00020c18  2**0
+ 19 .debug_str    0007bd38  00000000  00000000  00021cc6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0009c909  2**0
+ 20 .comment      00000043  00000000  00000000  0009d9fe  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d3c  00000000  00000000  0009c94c  2**2
+ 21 .debug_frame  00000d3c  00000000  00000000  0009da44  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000069  00000000  00000000  0009d688  2**0
+ 22 .debug_line_str 00000069  00000000  00000000  0009e780  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -206,7 +208,7 @@ __STATIC_FORCEINLINE void __enable_irq(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_TogglePin(OK_GPIO_Port, OK_Pin);
  80045e6:	f44f 7180 	mov.w	r1, #256	@ 0x100

@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "flash_layout.h"
+#include "app_header.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +55,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+__attribute__((section(".header"), used)) const app_header_t app_header =
+{
+  .ota_flag = 0,
+  .magic    = 0xABCDEFAB,
+  .size     = 0,
+  .crc      = 0,
+  .version  = 0 
+};
 
 /* USER CODE END 0 */
 
@@ -99,7 +108,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    
     /* USER CODE BEGIN 3 */
 	  HAL_GPIO_TogglePin(OK_GPIO_Port, OK_Pin);
 	  HAL_Delay(1000);

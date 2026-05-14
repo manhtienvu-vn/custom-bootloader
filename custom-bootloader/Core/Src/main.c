@@ -89,6 +89,15 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_GPIO_WritePin(OK_GPIO_Port, OK_Pin, RESET);
   HAL_Delay(2000);
+
+  if (bootloader_is_app_valid() != 0){
+    //Jump Failure
+    while(1){
+      HAL_GPIO_TogglePin(OK_GPIO_Port, OK_Pin);
+	    HAL_Delay(100);
+    }
+  }
+
   JumpToApplication();
   /* USER CODE END 2 */
 
