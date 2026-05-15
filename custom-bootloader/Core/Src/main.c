@@ -90,8 +90,32 @@ int main(void)
   HAL_GPIO_WritePin(OK_GPIO_Port, OK_Pin, RESET);
   HAL_Delay(2000);
 
-  if (bootloader_is_app_valid() != 0){
+  int error = bootloader_is_app_valid();
+
+  if (error != 0){
     //Jump Failure
+    switch (error){
+    case 1:
+      // MAGIC Error
+      break;
+    
+    case 2:
+      //RESET Error
+      break;
+    
+    case 3:
+      //SIZE Error
+      break;
+
+    case 4:
+      //CRC Error
+      break;
+
+    default:
+      //Error
+      break;
+    }
+
     while(1){
       HAL_GPIO_TogglePin(OK_GPIO_Port, OK_Pin);
 	    HAL_Delay(100);

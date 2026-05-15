@@ -188,6 +188,6 @@ SECTIONS
 
 	.header :
 	{
-	KEEP(*(.header))   /* Lệnh KEEP ngăn trình biên dịch xóa biến */
+	KEEP(*(.header))   
   } > APP_HEADER
 }

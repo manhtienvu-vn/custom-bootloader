@@ -2,13 +2,14 @@
  * bl_jump.c
  *
  *  Created on: May 12, 2026
- *      Author: ADMIN
+ *      Author: Manh Vu Tien
  */
 
 #include "main.h"
 #include "bl_jump.h"
 #include "flash_layout.h"
 #include "app_header.h"
+#include "crc32.h"
 
 #define APP_MAGIC 0xABCDEFAB
 
@@ -57,6 +58,18 @@ int bootloader_is_app_valid(void)
 	if ((reset_handler & 0xFF000000) != 0x08000000){ //Check if reset handler address is in Flash Memory region
 		return 2;
 	}
+
+    /* 3. Size sanity */
+    if (app_hdr->size == 0 || app_hdr->size > APP_MAX_SIZE){
+        return 3;
+    }
+    
+    /* 4. CRC check */
+    uint32_t calc_crc = crc32((const uint8_t *)APP_START_ADDR, app_hdr->size);
+    /* Compare the CRC calculated at run time with calculated CRC in the App Header */
+    if (calc_crc != app_hdr->crc){
+        return 4;
+    }
 
 	return 0; //VALID
 }
