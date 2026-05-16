@@ -59,8 +59,8 @@ __attribute__((section(".header"), used)) const app_header_t app_header =
 {
   .ota_flag = 0,
   .magic    = 0xABCDEFAB,
-  .size     = 0,
-  .crc      = 0,
+  .size     = 4676,
+  .crc      = 0x6B78F62C,
   .version  = 0 
 };
 

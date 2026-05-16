@@ -90,7 +90,7 @@ clean:
 	-@echo ' '
 
 post-build:
-	arm-none-eabi-objcopy -O binary "application.elf" "application.bin"
+	arm-none-eabi-objcopy -O binary --remove-section=.header application.elf application.bin
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
